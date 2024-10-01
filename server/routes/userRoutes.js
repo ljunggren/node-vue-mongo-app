@@ -1,29 +1,21 @@
-// server/routes/userRoutes.js
+// routes/userRoutes.js
+
 const express = require('express');
-const User = require('../models/User');
 const router = express.Router();
+const userController = require('../controllers/userController');
+const { protect } = require('../middleware/authMiddleware');
 
-// Get all users
-router.get('/', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Public Routes
+router.post('/register', userController.registerUser);
+router.post('/login', userController.loginUser);
+
+// Protected Routes
+// Add any protected routes here
+
+router.get('/dashboard', protect, (req, res) => {
+  res.json({ message: 'Welcome to the dashboard!' });
 });
 
-// Create a new user
-router.post('/', async (req, res) => {
-  const { name, email, password } = req.body;
-  const newUser = new User({ name, email, password });
-  try {
-    const savedUser = await newUser.save();
-    res.json(savedUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
+
 
 module.exports = router;
-
