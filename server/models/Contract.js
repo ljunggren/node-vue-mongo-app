@@ -7,7 +7,7 @@ const contractSchema = new mongoose.Schema({
     ref: 'Property',
     required: true,
   },
-  tenant: {
+  tenantId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tenant',
     required: true,
