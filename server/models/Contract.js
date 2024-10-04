@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const contractSchema = new mongoose.Schema({
-  property: {
+  propertyId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Property',
     required: true,
@@ -23,5 +23,5 @@ const contractSchema = new mongoose.Schema({
   },
 });
 
-const Contract = mongoose.model('Contract', contractSchema);
-module.exports = Contract;
+
+module.exports = mongoose.model('Contract', contractSchema);
